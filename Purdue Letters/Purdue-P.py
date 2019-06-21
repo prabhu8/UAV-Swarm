@@ -1,5 +1,5 @@
-import traj_gen as traj 
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import math
 import csv
@@ -7,7 +7,7 @@ import csv
 """ Enter your desired values in these variables"""
 
 """THIS WORKS BEST FOR DRONES BETWEEN 7-14 DRONES"""
-drones = 9
+drones = 14
 
 highest = 1.6           # Highest drone       
 ground_height = 0.3     # Minimum heigh off the ground        
@@ -87,10 +87,9 @@ with open(filename, 'w') as f:
 rangez = (max(z)-min(z))/2
 
 plt.figure()
-# plt.axis([min(x), max(x), min(), max(z), min(z), max(z)])
 ax = plt.axes(projection='3d')
-ax.scatter3D(x,y,z)
+ax.plot3D(x,y,z,'.')
 plt.show()
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
+# ax.set_xlabel('x')
+# ax.set_ylabel('y')
+# ax.set_zlabel('z')
