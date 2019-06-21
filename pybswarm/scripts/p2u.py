@@ -1,9 +1,9 @@
 #%%
+import bswarm
+import bswarm.trajectory_generation as tgen
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
-import bswarm
-import bswarm.trajectory_generation as tgen 
 
 #%%
 n_drone = 7
@@ -107,7 +107,7 @@ for trajx in trajxs:
 #%%
 import json
 path = '/home/zp/catkin_ws/src/turtlesim_cleaner/src/json/'
-with open('p2u.json', 'w') as f:
+with open('json/p2u.json', 'w') as f:
     json.dump(formation, f)
 
 #%%
