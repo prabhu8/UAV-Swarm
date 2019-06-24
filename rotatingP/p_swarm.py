@@ -16,25 +16,26 @@ import signal
 import sys
 
 # Change uris and sequences according to your setup
-DRONE0 = 'radio://0/80/2M/E7E7E7E701'
-DRONE1 = 'radio://0/80/2M/E7E7E7E702'
-DRONE2 = 'radio://0/80/2M/E7E7E7E703'
-DRONE3 = 'radio://0/80/2M/E7E7E7E704'
-DRONE4 = 'radio://0/80/2M/E7E7E7E705'
-DRONE5 = 'radio://0/80/2M/E7E7E7E706'
-DRONE6 = 'radio://1/70/2M/E7E7E7E707'
-DRONE7 = 'radio://0/70/2M/E7E7E7E708'
-DRONE8 = 'radio://1/70/2M/E7E7E7E709'
-DRONE9 = 'radio://0/70/2M/E7E7E7E710'
-DRONE10 = 'radio://0/80/2M/E7E7E7E711'
-DRONE11 = 'radio://0/80/2M/E7E7E7E712'
-DRONE12 = 'radio://0/80/2M/E7E7E7E713'
-DRONE13 = 'radio://0/80/2M/E7E7E7E714'
-DRONE14 = 'radio://0/80/2M/E7E7E7E715'
-DRONE15 = 'radio://0/80/2M/E7E7E7E716'
-DRONE16 = 'radio://0/80/2M/E7E7E7E717'
-DRONE17 = 'radio://0/80/2M/E7E7E7E718'
-DRONE18 = 'radio://0/80/2M/E7E7E7E719'
+DRONE0 = 'radio://0/70/2M/E7E7E7E701'
+DRONE1 = 'radio://0/70/2M/E7E7E7E702'
+DRONE2 = 'radio://0/70/2M/E7E7E7E703'
+DRONE3 = 'radio://1/70/2M/E7E7E7E704'
+DRONE4 = 'radio://1/70/2M/E7E7E7E705'
+DRONE5 = 'radio://1/70/2M/E7E7E7E706'
+DRONE6 = 'radio://2/80/2M/E7E7E7E707'
+DRONE7 = 'radio://2/80/2M/E7E7E7E708'
+DRONE8 = 'radio://2/80/2M/E7E7E7E709'
+DRONE9 = 'radio://2/80/2M/E7E7E7E710'
+DRONE10 = 'radio://1/80/2M/E7E7E7E711'
+DRONE11 = 'radio://2/90/2M/E7E7E7E712'
+DRONE12 = 'radio://2/90/2M/E7E7E7E713'
+DRONE13 = 'radio://2/90/2M/E7E7E7E714'
+DRONE14 = 'radio://2/90/2M/E7E7E7E715'
+DRONE15 = 'radio://2/90/2M/E7E7E7E716'
+DRONE16 = 'radio://3/100/2M/E7E7E7E717'
+DRONE17 = 'radio://3/100/2M/E7E7E7E718'
+DRONE18 = 'radio://3/100/2M/E7E7E7E719'
+DRONE19 = 'radio://3/100/2M/E7E7E7E720'
 
 
 
@@ -54,19 +55,25 @@ DRONE18 = 'radio://0/80/2M/E7E7E7E719'
 # List of URIs, comment the one you do not want to fly
 #DRONE4 ## Faulty Drone // Does not work
 trajectory_assigment = {
-    0: DRONE10,
-    1: DRONE11,
-    2: DRONE12,
-    3: DRONE13,
-    #4: DRONE14,
-    5: DRONE15,
-    #6: DRONE16,
-    #7: DRONE17,
-    8: DRONE18,
-    #9: DRONE10,
-    #10: DRONE11,
-    #11: DRONE12,
-    #12: DRONE13,
+    0: DRONE0,
+    1: DRONE1,
+    2: DRONE2,
+    3: DRONE3,
+    #4: DRONE4,
+    5: DRONE5,
+    6: DRONE6,
+    7: DRONE7,
+    8: DRONE8,
+    9: DRONE9,
+    # 10: DRONE10,
+    # 11: DRONE11,
+    # 12: DRONE12,
+    # 13: DRONE13,
+    # 14: DRONE14,
+    # 15: DRONE15,
+    # 16: DRONE16,
+    # 17: DRONE17,
+    # 18: DRONE18,
 }
 
 
@@ -195,9 +202,9 @@ def go_sequence(scf: Crazyflie,trajectory: List, duration: float):
         print("go")
         commander.takeoff(1.0, 2.0)
         time.sleep(10.0)
-        relative = False
-        commander.start_trajectory(trajectory_id, 2.0, relative)
-        time.sleep(duration*2)
+        #relative = False
+        #commander.start_trajectory(trajectory_id, 2.0, relative)
+        #time.sleep(duration*2)
     except Exception as e:
         print(e)
 
@@ -223,7 +230,7 @@ if __name__ == '__main__':
     factory = CachedCfFactory(rw_cache='./cache')
     uris = {trajectory_assigment[key] for key in trajectory_assigment.keys()}
     print("uris:", uris)
-    with open('figure8.json', 'r') as f:
+    with open('formP.json', 'r') as f:
         traj_list = json.load(f)
     
     #building arguments list in swarm
