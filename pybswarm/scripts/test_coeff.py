@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 
 #%%
-n_drone = 7
+n_drone = 2
 pi = np.pi
 
 #read wayponts
@@ -56,17 +56,17 @@ ax.plot3D(P2[0,:], P2[1,:], P2[2,:], 'wx')
 #initialize waypoints
 waypoints = [P0]
 waypoints.append(P1)
-waypoints.append(P1)
+# waypoints.append(P1)
 waypoints.append(P2)
-waypoints.append(P2)
+# waypoints.append(P2)
 #waypoints.append(P0)
 waypoints = np.array(waypoints)
 print(waypoints.shape)
 #%%
-# T = np.zeros((waypoints.shape[0]-1))
-# for i in range(len(T)):
-#     T[i] = (i+1)**2
-T = [10]*(waypoints.shape[0]-1)
+#T = [10]*(waypoints.shape[0]-1)
+T = np.zeros(waypoints.shape[0]-1)
+for i in range(len(T)):
+    T[i] = i+1
 print(T)
 p_list = []
 trajxs = []
@@ -108,9 +108,23 @@ plt.figure()
 for trajx in trajxs:
     trajx.plot()
 #%%
-import json
-path = '/home/zp/catkin_ws/src/turtlesim_cleaner/src/json/'
-with open('json/p2u.json', 'w') as f:
-    json.dump(formation, f)
+# import json
+# path = '/home/zp/catkin_ws/src/turtlesim_cleaner/src/json/'
+# with open('json/p2u.json', 'w') as f:
+#     json.dump(formation, f)
 
+test_traj = formation[1]
+test_traj = np.array(test_traj)
+print('start printing leg')
+for leg in test_traj:
+    T = leg[0]
+    print(leg)
+    for i in range(1,len(leg)):
+        leg[i] = leg[i] / (T**(i-1))
+    print('new coeff')
+    print(leg)
+    
+#%%
+header = 'duration,x^0,x^1,x^2,x^3,x^4,x^5,x^6,x^7,y^0,y^1,y^2,y^3,y^4,y^5,y^6,y^7,z^0,z^1,z^2,z^3,z^4,z^5,z^6,z^7,yaw^0,yaw^1,yaw^2,yaw^3,yaw^4,yaw^5,yaw^6,yaw^7'
+np.savetxt('csv/test1.csv',test_traj,delimiter=',',header=header)
 #%%
